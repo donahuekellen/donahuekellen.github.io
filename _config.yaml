@@ -8,10 +8,10 @@ name: "Kellen Donahue"
 description: "A personal academic website demonstration"
 url: "https://donahuekellen.github.io"
 search: true
-logo: "/assets/images/alaska.png"
+logo: "/assets/images/kellen.jpg"
 author:
   name		: "Kellen Donahue"
-  avatar	: "/assets/images/alaska.png"
+  avatar	: "/assets/images/kellen.jpg"
   bio		: "I am a Graduate Student of Computer Science at the University of Montana"
   location	: "UM"
 
