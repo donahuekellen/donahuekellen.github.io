@@ -1,7 +1,7 @@
 
 
 d3.csv("https://raw.githubusercontent.com/donahuekellen/donahuekellen.github.io/master/_data/alcohol-consumption-per-person-us.csv").then( function(data2) {
-d3.csv("https://raw.githubusercontent.com/donahuekellen/donahuekellen.github.io/master/_data/number-of-cigarettes-smoked-per-smoker-per-day.csv").then( function(data)
+d3.csv("https://raw.githubusercontent.com/donahuekellen/donahuekellen.github.io/master/_data/number-of-cigarettes-smoked-per-smoker-per-day.csv").then( function(data){
 	var margin = {top:20,right:20,bottom:30,left:60}
 
 width = 700 - margin.left - margin.right;

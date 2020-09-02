@@ -151,7 +151,7 @@ svg.append("path")
 var path = svg.selectAll("dot")
      .data(data)
      .enter().append("circle")
-     .attr("r", 1)
+     .attr("r", 8)
      .attr("cx", function (d) {
            return x(d.totala);
      })
@@ -160,11 +160,12 @@ var path = svg.selectAll("dot")
      })
 	 .attr("date",function(d){return d.Year;})
      .attr("stroke", "#0000FF")
-     .attr("stroke-width", 10)
-     .attr("fill", "#FFFFFF")
+     .attr("stroke-width", 1)
+     .attr("fill", "#0000FF")
 	 .on("mouseenter", onenter)
 	 .on("mouseleave", onexit);
 	 
+	
 svg.append("g")
      .attr("transform", "translate(0," + height + ")")
      .call(d3.axisBottom(x));
