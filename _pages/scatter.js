@@ -37,8 +37,8 @@ function onexit(data){
 	
 	
 };
-d3.csv("alcohol-consumption-per-person-us.csv").then( function(data2) {
-d3.csv("number-of-cigarettes-smoked-per-smoker-per-day.csv").then( function(data) {
+d3.csv("https://raw.githubusercontent.com/donahuekellen/donahuekellen.github.io/master/_data/alcohol-consumption-per-person-us.csv").then( function(data2) {
+d3.csv("https://raw.githubusercontent.com/donahuekellen/donahuekellen.github.io/master/_data/number-of-cigarettes-smoked-per-smoker-per-day.csv").then( function(data) {
 var margin = {top:20,right:20,bottom:40,left:60}
 
 width = 1000 - margin.left - margin.right;

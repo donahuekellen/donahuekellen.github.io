@@ -1,41 +1,11 @@
-/*data = [{
-     date: 2009,
-     wage: 7.25
-}, {
-     date: 2008,
-     wage: 6.55
-}, {
-     date: 2007,
-     wage: 5.85
-}, {
-     date: 1997,
-     wage: 5.15
-}, {
-     date: 1996,
-     wage: 4.75
-}, {
-     date: 1991,
-     wage: 4.25
-}, {
-     date: 1981,
-     wage: 3.35
-}, {
-     date: 1980,
-     wage: 3.10
-}, {
-     date: 1979,
-     wage: 2.90
-}, {
-     date: 1978,
-     wage: 2.65
-}]*/
 
 
 	
 
 
-d3.csv("alcohol-consumption-per-person-us.csv").then( function(data2) {
-d3.csv("number-of-cigarettes-smoked-per-smoker-per-day.csv").then( function(data) {
+
+d3.csv("https://raw.githubusercontent.com/donahuekellen/donahuekellen.github.io/master/_data/alcohol-consumption-per-person-us.csv").then( function(data2) {
+d3.csv("https://raw.githubusercontent.com/donahuekellen/donahuekellen.github.io/master/_data/number-of-cigarettes-smoked-per-smoker-per-day.csv").then( function(data)
 	var margin = {top:20,right:20,bottom:30,left:60}
 
 width = 700 - margin.left - margin.right;
