@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <script type="text/javascript" src="d3.min.js"></script>
+  <script src="d3-color.v2.min.js"></script>
+  <script src="d3-scale-chromatic.v1.min.js"></script>
+  <script src="d3-geo-projection.v2.min.js"></script>
+  <script src="d3-contour.v1.min.js"></script>
+  
+  </head>
+  <body>
+	
+	<h1 style="text-align:center">Do Canadian and Alaskan City Population Sizes Decrease With Increasing Elevation?</h1>
+	<div style="white-space:nowrap">
+	
+	
+	<div style="float:left;font-size:40%;" id="scatter"></div>
+	<div style="float:left;font-size:150%;" id="scatter2"></div>
+	
+	
+	</div>
+	<div style="white-space:nowrap">
+	<div style="float:left;font-size:150%;" id="scatter3">
+	<div style="float:right;font-size:75%;transform:translate(50px,0px)">
+	<p><b>NOTE</b>:Only cities with a population greater than 1000 were shown on the raster plot to avoid clutter
+	<br><br><br><br><br><br><br><br><br><br>
+	<b>Sources</b><br>
+	1) ASTER Global Digital Elevation Map. (n.d.). Retrieved September 21, 2020,<br>&nbsp;&nbsp;&nbsp;&nbsp; from https://asterweb.jpl.nasa.gov/gdem.asp
+	<br>
+	2) Canada Cities Database. (n.d.). Retrieved September 21, 2020,<br>&nbsp;&nbsp;&nbsp;&nbsp; from https://simplemaps.com/data/canada-cities
+	<br>
+	3) United States Cities Database. (n.d.). Retrieved September 21, 2020,<br>&nbsp;&nbsp;&nbsp;&nbsp; from https://simplemaps.com/data/us-cities
+	</p>
+	</div></div>
+	</div>
+   <script type="text/javascript" src="raster.js"></script>
+   
+   <script type="text/javascript" src="elev.js"></script>
+   <script type="text/javascript" src="scatterplot.js"></script>
+   <script type="text/javascript" src="colorbar.js"></script>
+  </body>
+</html>
