@@ -48,7 +48,9 @@ var y = d3.scaleLinear()
 var yAxis = d3.axisRight()
   .scale(y)
   .ticks(4)
-  .tickValues([1000,2000,3000,4000,5000,6000]);
+  .tickValues([1000,2000,3000,4000,5000,6000])
+  .tickFormat(function(d){return d+" m"});
+  
 
 key.append("g")
   .attr("class", "y axis")

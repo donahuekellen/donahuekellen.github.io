@@ -1,7 +1,7 @@
 
 d3.csv("caakpop.csv").then(function(data){
 	var margin = {top:20,right:50,bottom:50,left:40}
-d3.select("#scatter3").style("transform",'translate(0px,-430px)');
+d3.select("#scatter3").style("transform",'translate(0,-430)');
 width2 = 1080 - margin.left - margin.right;
 height2 = 500 - margin.top - margin.bottom;
 //format data
