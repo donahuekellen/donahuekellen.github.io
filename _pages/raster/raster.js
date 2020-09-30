@@ -10,6 +10,8 @@ function range(start, end) {
 // append the svg object to the body of the page
 
 var svg = d3.select("#scatter").append("svg")
+	 .attr("width","100%")
+	 .attr("height","auto")
 	 .attr("viewBox","0 0 "+width+" "+height);
 
 var g1 = svg.append("g")
