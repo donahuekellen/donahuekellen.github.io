@@ -48,20 +48,20 @@ svg.append("rect")
     .attr("height", "100%")
     .attr("fill", "darkgrey");
 
-svg.append("text")
-	.attr("transform", "translate(40,30)")
-	.attr("font-size","125%")
-	.attr("font-weight","bold")
-	.attr("x","84%")
-	.attr("y","95.5%")
-    .text("*Continental US only");
-
 
 var politics = svg.append("g");
 var borders = svg.append("g");
 var ghosts = svg.append("g");
 var legend = politics.append("g");
 var table = politics.append("g");
+
+politics.append("text")
+	.attr("transform", "translate(40,30)")
+	.attr("font-size","125%")
+	.attr("font-weight","bold")
+	.attr("x","84%")
+	.attr("y","95.5%")
+    .text("*Continental US only");
 
 
 table.attr("transform","translate(80,650)")
