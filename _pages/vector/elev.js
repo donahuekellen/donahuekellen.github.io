@@ -3,7 +3,9 @@
 // set the dimensions and margins of the graph
 var margin = {top: 20, right: 30, bottom: 30, left: 40},
     width = 1450,
-    height = 800;
+    height = 800,
+	tablewidth = 25,
+	tableheight = 6;
 	
 // append the svg object to the body of the page
 function range(start, end,inc) {
@@ -26,11 +28,13 @@ svg.append("rect")
 
 svg.append("text")
 	.attr("transform", "translate(40,30)")
-	.attr("font-size",20)
+	.attr("font-size","125%")
 	.attr("font-weight","bold")
 	.attr("x","84%")
 	.attr("y","95.5%")
     .text("*Continental US only");
+
+
 var politics = svg.append("g");
 var borders = svg.append("g");
 var ghosts = svg.append("g");
@@ -41,64 +45,70 @@ var table = svg.append("g");
 table.attr("transform","translate(80,650)")
 
 table.append("rect")
-	.attr("width", "320")
-    .attr("height", "120")
+	.attr("width", "22%")
+    .attr("height", "15%")
     .attr("fill", "white")
 	.attr("stroke","black")
 
 table.append("rect")
-	.attr("width", "160")
-    .attr("height", "40")
+	.attr("width", "11%")
+    .attr("height", "5%")
     .attr("fill", "transparent")
 	.attr("stroke","black")
 
 table.append("rect")
-	.attr("width", "160")
-    .attr("height", "40")
-	.attr("transform", "translate(0,40)")
+	.attr("width", "11%")
+    .attr("height", "5%")
+	.attr("y","5%")
     .attr("fill", "transparent")
 	.attr("stroke","black")
 	
 table.append("rect")
-	.attr("width", "160")
-    .attr("height", "40")
-	.attr("transform", "translate(0,80)")
+	.attr("width", "11%")
+    .attr("height", "5%")
+	.attr("y","10%")
     .attr("fill", "transparent")
 	.attr("stroke","black")
 
 table.append("rect")
-	.attr("width", "160")
-    .attr("height", "40")
-	.attr("transform", "translate(160,0)")
+	.attr("width", "11%")
+    .attr("height", "5%")
+	.attr("x","11%")
     .attr("fill", "transparent")
 	.attr("stroke","black")
 	
 table.append("rect")
-	.attr("width", "160")
-    .attr("height", "40")
-	.attr("transform", "translate(160,40)")
+	.attr("width", "11%")
+    .attr("height", "5%")
+	.attr("x","11%")
+	.attr("y","5%")
     .attr("fill", "transparent")
 	.attr("stroke","black")
 	
 table.append("rect")
-	.attr("width", "160")
-    .attr("height", "40")
-	.attr("transform", "translate(160,80)")
+	.attr("width", "11%")
+    .attr("height", "5%")
+	.attr("x","11%")
+	.attr("y","10%")
     .attr("fill", "transparent")
 	.attr("stroke","black")
 	
 
 table
     .append("text")
-	.attr("transform", "translate(40,30)")
-	.attr("font-size",33)
+	.attr("x","3%")
+	.attr("y","3.5%")
+	.attr("font-size","200%")
 	.attr("font-weight","bold")
     .text("Party");
 
+
+
 table
     .append("text")
-	.attr("transform", "translate(165,30)")
-	.attr("font-size",33)
+	.attr("x","11.5%")
+	.attr("y","3.5%")
+	.attr("font-size","200%")
 	.attr("font-weight","bold")
     .text("Hauntings");
 	
@@ -106,33 +116,33 @@ table
 table
     .append("text")
 	.attr("transform", "translate(5,70)")
-	.attr("font-size",33)
+	.attr("font-size","200%")
     .text("Republican");
 	
 table
     .append("text")
 	.attr("transform", "translate(210,70)")
-	.attr("font-size",33)
+	.attr("font-size","200%")
     .text("5152");
 	
 
 table
     .append("text")
 	.attr("transform", "translate(12,110)")
-	.attr("font-size",33)
+	.attr("font-size","200%")
     .text("Democrat");
 	
 table
     .append("text")
 	.attr("transform", "translate(210,110)")
-	.attr("font-size",33)
+	.attr("font-size","200%")
     .text("4292");
 
-legend.attr("transform","translate(1050,20)")
+legend.attr("transform","translate(1000,20)")
 
 legend.append("rect")
-	.attr("width", "180")
-    .attr("height", "110")
+	.attr("width", "13%")
+    .attr("height", "14%")
     .attr("fill", "white")
 	.attr("stroke","black")
 	
@@ -144,7 +154,7 @@ legend.append("path")
 legend
     .append("text")
 	.attr("transform", "translate(40,25)")
-	.attr("font-size",30)
+	.attr("font-size","200%")
     .text("Haunting");
 	
 legend.append("path")
@@ -156,7 +166,7 @@ legend.append("path")
 legend
     .append("text")
 	.attr("transform", "translate(40,65)")
-	.attr("font-size",30)
+	.attr("font-size","200%")
     .text("Republican");
 	
 legend.append("path")
@@ -168,7 +178,7 @@ legend.append("path")
 legend
     .append("text")
 	.attr("transform", "translate(40,105)")
-	.attr("font-size",30)
+	.attr("font-size","200%")
     .text("Democrat");
 
 var colorScale = d3.scaleSequential()
