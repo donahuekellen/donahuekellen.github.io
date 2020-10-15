@@ -13,13 +13,35 @@ function range(start, end,inc) {
     return [start, ...range(start + inc, end,inc)];
 }
 
+function clicked(event){
+    event.stopPropagation();
+	
+	zoom.transform(svg,d3.zoomIdentity);
+}
 
-
-//based on the invert function from https://observablehq.com/@d3/geotiff-contours-ii
+function zoomed(event) {
+	
+    const {transform} = event;
+	transform.x = Math.min(0, Math.max(transform.x, width - width * transform.k));
+	transform.y = Math.min(0, Math.max(transform.y, height - height * transform.k));
+    politics.attr("transform", transform);
+    	politics.selectAll("path").attr("stroke-width",1/transform.k)
+	borders.attr("transform", transform);
+	borders.selectAll("path").attr("stroke-width",3/transform.k)
+	ghosts.attr("transform", transform);
+	ghosts.selectAll("circle")
+		.attr("stroke-width",.1/transform.k+"%")
+		.attr("r",.2/transform.k+"%");
+  }
+var zoom = d3.zoom()
+  .scaleExtent([1, 15])
+  .on("zoom", zoomed)
 
 var svg = d3.select("#scatter").append("svg")
 		.attr("width",width)
 		.attr("height",height)
+		.on("click",clicked)
+		.call(zoom);
 
 svg.append("rect")
     .attr("width", "150%")
@@ -38,8 +60,8 @@ svg.append("text")
 var politics = svg.append("g");
 var borders = svg.append("g");
 var ghosts = svg.append("g");
-var legend = svg.append("g");
-var table = svg.append("g");
+var legend = politics.append("g");
+var table = politics.append("g");
 
 
 table.attr("transform","translate(80,650)")
@@ -215,6 +237,7 @@ d3.csv("haunted_places.csv").then(function(ghost){
 	.enter().append("path")
 	
 	.attr("stroke", "black")
+	.attr("stroke-width",1)
 	.attr("fill",function(d){
 		if (d.properties.party == 1){
 			return 'red'
@@ -237,14 +260,24 @@ d3.csv("haunted_places.csv").then(function(ghost){
 	.attr("d", d3.geoPath(projection));
 		
 
-			
-	ghosts.selectAll("path")
+	
+
+	ghosts.selectAll("dot")
         .data(ghost)
-        .enter().append("path")
+        .enter().append("circle")
 		.attr("fill", "yellow")
 		.attr("stroke", "black")
-		.attr("d",d3.symbol().size(10).type(d3.symbolSquare))
-		.attr("transform",function(d){return "translate("+projection([d.lon,d.lat])+")"})
+		.attr("stroke-width",".1%")
+		.attr("r",".2%")
+		.attr("cx",function(d){return projection([d.lon,d.lat])[0]})
+		.attr("cy",function(d){return projection([d.lon,d.lat])[1]})
+	// ghosts.selectAll("path")
+        // .data(ghost)
+        // .enter().append("circle")
+		// .attr("fill", "yellow")
+		// .attr("stroke", "black")
+		// .attr("d",d3.symbol().size(10).type(d3.symbolSquare))
+		// .attr("transform",function(d){return "translate("+projection([d.lon,d.lat])+")"})
 	
 
 })})})
