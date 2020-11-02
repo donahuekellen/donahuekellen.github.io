@@ -15,7 +15,8 @@ function range(start, end,inc) {
 
 
 var svg = d3.select("#scatter").append("svg")
-      .attr("viewBox", [0, 0, width, height]);
+	.attr("width",width)
+	.attr("height",height);
 	  
 
 svg.append("rect")
