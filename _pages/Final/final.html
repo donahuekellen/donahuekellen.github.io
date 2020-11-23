@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <script src="d3-geo-projection.v2.min.js"></script>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/d3-tile"></script> 
+<script src="https://unpkg.com/topojson-client@3"></script>
+<script src="geotiff.min.js"></script>
+
+  </head>
+  <body style="background-color:black">
+	
+	<h1 style="text-align:center;color:white;">North 45 Ground Freeze-Thaw Map</h1>
+	
+<div id="prev10" style="position:absolute;transform:translate(360px,0px)">
+    <input name="updateButton" 
+           type="button" 
+           value="prev10" 
+           onclick="updateData(-10)" />
+</div>
+	
+<div id="prev" style="position:absolute;transform:translate(420px,0px)">
+    <input name="updateButton" 
+           type="button" 
+           value="prev" 
+           onclick="updateData(-1)" />
+</div>
+
+<div id="next" style="position:absolute;transform:translate(593px,0px)">
+    <input name="updateButton" 
+           type="button" 
+           value="next" 
+           onclick="updateData(1)" />
+</div>
+<div id="next10" style="position:absolute;transform:translate(638px,0px)">
+    <input name="updateButton" 
+           type="button" 
+           value="next10" 
+           onclick="updateData(10)" />
+</div>
+
+
+
+<div id="datedisplay" style="position:absolute;width:120px;background-color:white;transform:translate(470px,2px)">
+    <div style="text-align:center;"><span id="date" ></span></div>
+</div>
+
+	<div id="tooltip"  style="position:absolute;margin-top:-100px;background-color:black;color:white;width:320px; opacity:0;font-size:150%;border-style: solid;" class="tooltip">
+			<div style="text-align:center;"><span id="name"></span></div>
+			<div style="font-size:80%;text-align:left;text-indent:85px">Longitude: <span id="lon"></span></div>
+			<div style="font-size:80%;text-align:left;text-indent:100px">Latitude: <span id="lat"></span></div>
+			<div style="font-size:80%;text-align:left;text-indent:90px">Elevation: <span id="elev"></span></div>
+		</div>
+	</div>
+	<div style="display: flex;justify-content: center;">
+	<div id="scatter"></div>
+	</div>
+	
+	<div style="text-align:center;color:white">
+   <script type="text/javascript" src="test.js"></script>
+  </body>
+</html>
