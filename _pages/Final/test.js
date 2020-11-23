@@ -54,6 +54,7 @@ let image = svg.append("g")
     var raster = svg.append("g");
 	var pred = svg.append("g");
     var vector = svg.append("g");
+    var legend = svg.append("g");
 
     // Compute the projected initial center.
 function range(start, end,inc) {
@@ -128,6 +129,51 @@ function invert(d) {
 
 var colorScale = d3.scaleSequential()
   .interpolator(d3.interpolateViridis);
+  
+  legend.attr("transform","translate(1220,600)")
+
+legend.append("rect")
+.attr("width", "13%")
+    .attr("height", "20%")
+    .attr("fill", "white")
+.attr("stroke","black")
+legend.append("path")
+.attr("d", d3.symbol().size(200).type(d3.symbolCircle))
+.attr("transform", "translate(20,15)")
+    .style("fill", colorScale(0))
+.style("stroke", "black")
+legend
+    .append("text")
+.attr("transform", "translate(40,25)")
+.attr("font-size","200%")
+    .text("Frozen");
+legend.append("path")
+.attr("d", d3.symbol().size(200).type(d3.symbolCircle))
+.attr("transform", "translate(20,55)")
+    .style("fill", colorScale(1))
+.style("stroke", "black")
+
+legend
+    .append("text")
+.attr("transform", "translate(40,65)")
+.attr("font-size","200%")
+    .text("Thawed");
+legend.append("path")
+.attr("d", d3.symbol().size(200).type(d3.symbolSquare))
+.attr("transform", "translate(20,95)")
+    .style("fill", "green")
+.style("stroke", "black")
+
+legend
+    .append("text")
+.attr("transform", "translate(40,95)")
+.attr("font-size","200%")
+    .text("Weather");
+legend
+    .append("text")
+.attr("transform", "translate(50,115)")
+.attr("font-size","200%")
+    .text("station");
 
 
 d3.buffer("fred0.tif").then(function (tiffdata){
