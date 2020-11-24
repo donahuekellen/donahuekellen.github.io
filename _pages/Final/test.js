@@ -195,7 +195,7 @@ d3.csv("weather_stations.csv").then(function (stations){
 	var contours = d3.contours()
     .size([n,m])
     .thresholds(thresholds)
-	.smooth(true)
+	.smooth(false)
 	(rasters[0])
 	
 	path = d3.geoPath(projection).pointRadius(1)
@@ -253,7 +253,7 @@ tiff = GeoTIFF.parse(tiffdata)
 	var contours = d3.contours()
     .size([n,m])
     .thresholds(thresholds)
-	.smooth(true)
+	.smooth(false)
 	(rasters[0])
     // Select the section we want to apply our changes to
         pred.selectAll("path").remove()
