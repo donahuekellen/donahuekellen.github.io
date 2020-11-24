@@ -39,7 +39,7 @@ var ease_r_km = 6371.228,ease_c_km = 25.067525,ease_cos_phi = 0.866025403,ease_r
 	  .scale(projection.scale() * 2 * Math.PI);
 
     var zoom = d3.zoom()
-        .scaleExtent([3, 30])
+        .scaleExtent([3, 40])
         .on("zoom", zoomed);
 
     var svg = d3.select("#scatter").append("svg")
