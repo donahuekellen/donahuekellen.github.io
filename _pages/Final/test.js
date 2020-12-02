@@ -18,7 +18,7 @@ function getDates(startDate, stopDate) {
     return dateArray;
 }
 
-var dateArray = getDates(new Date(2014,12,1),new Date(2015,11,31))
+var dateArray = getDates(new Date(2014,12,2),new Date(2015,11,31))
 
 var currDay = 0
 
@@ -39,7 +39,7 @@ var ease_r_km = 6371.228,ease_c_km = 25.067525,ease_cos_phi = 0.866025403,ease_r
 	  .scale(projection.scale() * 2 * Math.PI);
 
     var zoom = d3.zoom()
-        .scaleExtent([3, 40])
+        .scaleExtent([3, 50])
         .on("zoom", zoomed);
 
     var svg = d3.select("#scatter").append("svg")
@@ -130,61 +130,79 @@ function invert(d) {
 var colorScale = d3.scaleSequential()
   .interpolator(d3.interpolateViridis);
   
-  legend.attr("transform","translate(1220,600)")
+  legend.attr("transform","translate(570,0)")
 
 legend.append("rect")
-.attr("width", "13%")
-    .attr("height", "20%")
+.attr("width", "60%")
+    .attr("height", "3.5%")
     .attr("fill", "white")
 .attr("stroke","black")
 legend.append("path")
-.attr("d", d3.symbol().size(200).type(d3.symbolCircle))
-.attr("transform", "translate(20,15)")
+.attr("d", d3.symbol().size(150).type(d3.symbolSquare))
+.attr("transform", "translate(20,12)")
     .style("fill", colorScale(0))
 .style("stroke", "black")
 legend
     .append("text")
-.attr("transform", "translate(40,25)")
-.attr("font-size","200%")
+.attr("transform", "translate(40,20)")
+.attr("font-size","150%")
     .text("Frozen");
 legend.append("path")
-.attr("d", d3.symbol().size(200).type(d3.symbolCircle))
-.attr("transform", "translate(20,55)")
+.attr("d", d3.symbol().size(150).type(d3.symbolSquare))
+.attr("transform", "translate(180,12)")
     .style("fill", colorScale(1))
 .style("stroke", "black")
 
 legend
     .append("text")
-.attr("transform", "translate(40,65)")
-.attr("font-size","200%")
+.attr("transform", "translate(200,20)")
+.attr("font-size","150%")
     .text("Thawed");
 legend.append("path")
-.attr("d", d3.symbol().size(200).type(d3.symbolSquare))
-.attr("transform", "translate(20,95)")
-    .style("fill", "green")
+.attr("d", d3.symbol().size(150).type(d3.symbolCircle))
+.attr("transform", "translate(360,12)")
+    .style("fill", "lightgreen")
+.style("stroke", "black")
+
+legend.append("path")
+.attr("d", d3.symbol().size(150).type(d3.symbolCircle))
+.attr("transform", "translate(380,12)")
+    .style("fill", "red")
+.style("stroke", "black")
+
+legend.append("path")
+.attr("d", d3.symbol().size(150).type(d3.symbolCircle))
+.attr("transform", "translate(400,12)")
+    .style("fill", "black")
 .style("stroke", "black")
 
 legend
     .append("text")
-.attr("transform", "translate(40,95)")
-.attr("font-size","200%")
-    .text("Weather");
-legend
-    .append("text")
-.attr("transform", "translate(50,115)")
-.attr("font-size","200%")
-    .text("station");
+.attr("transform", "translate(420,20)")
+.attr("font-size","150%")
+    .text("Weather Station Correct/Incorrect/Offline");
 
-
+station_colors = ['black','red','lightgreen']
 d3.buffer("geotiff/fred0.tif").then(function (tiffdata){
 d3.csv("weather_stations.csv").then(function (stations){
+d3.csv("station_validation.csv").then(function (validation){
 	stations.forEach(
 	function (d) {
 			d.longitude = d.lon;
 			d.latitude = d.lat;
 			d.lon = projection([+d.lon,+d.lat])[0];
 			d.lat = projection([+d.lon,+d.lat])[1];
+			counter = 0
+			validation.forEach(
+			function(g){
+				d['day'+counter] = 1+(+g[d['#id']])
+				counter = counter+1
+			})
 	});
+	
+	
+	
+	console.log(stations);
 	tiff = GeoTIFF.parse(tiffdata)
     var image = tiff.getImage();
 	var n = image.getWidth();
@@ -214,9 +232,9 @@ d3.csv("weather_stations.csv").then(function (stations){
 	dots = vector.selectAll("path")
         .data(stations)
         .enter().append("path")
-		.attr("fill", "lightgreen")
+		.attr("fill", function(d){return station_colors[d.day0]})
 		.attr("stroke", "black")
-		.attr("d",d3.symbol().size(3).type(d3.symbolSquare))
+		.attr("d",d3.symbol().size(3).type(d3.symbolCircle))
 		.attr("transform",function(d){return "translate("+[d.lon,d.lat]+")"})
 		.on("mouseenter", onenter)
 		.on("mouseleave", onexit);		
@@ -229,7 +247,7 @@ d3.csv("weather_stations.csv").then(function (stations){
             .scale(3)
             .translate(-center[0], -center[1]));
      
-})})
+})})})
 
 function updateData(day) {
 	currDay = currDay + day
@@ -242,8 +260,8 @@ function updateData(day) {
 	datedisplay.select("#date").text(dateArray[currDay].toDateString())
     // Get the data again
     d3.buffer("geotiff/fred"+currDay+".tif").then(function (tiffdata){
-
-tiff = GeoTIFF.parse(tiffdata)
+	
+	tiff = GeoTIFF.parse(tiffdata)
     var image = tiff.getImage();
 	var n = image.getWidth();
 	var m = image.getHeight();	
@@ -263,19 +281,17 @@ tiff = GeoTIFF.parse(tiffdata)
         .enter().append("path")
 		.attr("fill", function(d){
 			
-				temp = d.value//(d.value-100)/(160)
+				temp = d.value
 				return colorScale(temp)
 		})
 		.attr("opacity",.5)
 		.attr("d", path)
 
     });
+	dots.attr("fill", function(d){return station_colors[d['day'+currDay]]})
 }
 
 function onenter(data){
-	
-	// var date = this.__data__.Year;
-	// tooltip.style("opacity", 1)
 	
 	tooltip.style("opacity", 1)
 	tooltip.style("transform","translate("+(event.pageX)+"px,"+(event.pageY+15)+"px)")
@@ -283,10 +299,6 @@ function onenter(data){
     tooltip.select("#lon").text(d3.format(".2f")(this.__data__.longitude))
 	tooltip.select("#lat").text(d3.format(".2f")(this.__data__.latitude))
 	tooltip.select("#elev").text(this.__data__.elevation)
-	// tooltip.select("#beer").text(d3.format(".2f")(this.__data__.Beer))
-    // tooltip.select("#cigarettes").text(d3.format(".2f")(this.__data__.total))
-	// tooltip.select("#male").text(d3.format(".2f")(this.__data__.Male))
-	// tooltip.select("#female").text(d3.format(".2f")(this.__data__.Female))
 };
 
 function onexit(data){
@@ -297,19 +309,6 @@ function onexit(data){
     tooltip.select("#lon").text("")
 	tooltip.select("#lat").text("")
 	tooltip.select("#elev").text("")
-	// d3.selectAll("circle").style('opacity', 1)
-		  // .style('stroke','#0000FF')
-		  // .style('fill','#0000FF');
-    
-    // tooltip.select("#year").text(" ")
-    // tooltip.select("#alcohol").text("")
-	// tooltip.select("#spirits").text("")
-	// tooltip.select("#wine").text("")
-	// tooltip.select("#beer").text("")
-    // tooltip.select("#cigarettes").text("")
-	// tooltip.select("#male").text("")
-	// tooltip.select("#female").text("")
-	//tooltip.style("opacity", 0)
 	
 	
 };
@@ -320,7 +319,6 @@ function onexit(data){
 url = (x, y, z) => `https://server.arcgisonline.com/arcgis/rest/services/World_Street_Map/MapServer/tile/${z}/${y}/${x}.png'`
 function zoomed(event) {
 	var transform = event.transform;
-	console.log(transform)
 	transform.x = Math.min(transform.k*width/3+100, Math.max(transform.x,  width-width*transform.k/3-100));
 	transform.y = Math.min(transform.k*width/3, Math.max(transform.y,  850*transform.k+height-height*transform.k));
 	
@@ -344,7 +342,7 @@ function zoomed(event) {
   
   pred.attr("transform", "translate(" + [transform.x, transform.y] + ")scale(" + transform.k + ")")
 	
-	dots.attr("d",d3.symbol().size(3/(transform.k)).type(d3.symbolSquare))
+	dots.attr("d",d3.symbol().size(3/(transform.k)).type(d3.symbolCircle))
 }
 
 function stringify(scale, translate) {
