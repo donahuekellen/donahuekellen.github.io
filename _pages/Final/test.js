@@ -176,7 +176,7 @@ legend
     .text("station");
 
 
-d3.buffer("fred0.tif").then(function (tiffdata){
+d3.buffer("geotiff/fred0.tif").then(function (tiffdata){
 d3.csv("weather_stations.csv").then(function (stations){
 	stations.forEach(
 	function (d) {
@@ -241,7 +241,7 @@ function updateData(day) {
 	}
 	datedisplay.select("#date").text(dateArray[currDay].toDateString())
     // Get the data again
-    d3.buffer("fred"+currDay+".tif").then(function (tiffdata){
+    d3.buffer("geotiff/fred"+currDay+".tif").then(function (tiffdata){
 
 tiff = GeoTIFF.parse(tiffdata)
     var image = tiff.getImage();
